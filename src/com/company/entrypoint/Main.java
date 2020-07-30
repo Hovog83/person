@@ -10,7 +10,6 @@ import com.company.core.model.Singer;
 public class Main {
 
     public static void main(String[] args) {
-
         PersonFactory personType = new PersonFactory();
 
         Person dancer = new Dancer("Sofi","Folk dance");
@@ -24,5 +23,4 @@ public class Main {
 
 
     }
-
 }

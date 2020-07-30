@@ -10,9 +10,9 @@ import com.company.core.service.interfacer.PersonAction;
 public class PersonFactory {
     private  Person model;
 
-    public  void init(Person model,PersonEnum type){
+    public  PersonAction init(Person model,PersonEnum type){
         this.model = model;
-        this.getPerson(type);
+       return this.getPerson(type);
     }
 
     public PersonAction getPerson(PersonEnum type){
@@ -23,6 +23,7 @@ public class PersonFactory {
                 toReturn = new DancerActionImpl(this.model);
                 break;
             case PROGRAMMER:
+
                 toReturn = new ProgrammerActionImpl(this.model);
                 break;
             case SINGER:
