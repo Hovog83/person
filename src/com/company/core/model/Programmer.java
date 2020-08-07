@@ -1,12 +1,12 @@
 package com.company.core.model;
 
+import com.company.core.annotations.ModelEnum;
+import com.company.core.model.Person;
+
+@ModelEnum(designation={"SOFTWARE_ENGINEER","HARDWARE_ENGINEER","DATA_ENGINEER"})
 public class Programmer extends Person {
 
-    public Programmer(String name, String designation) {
-        this.name = name;
-        this.designation = designation;
-        System.out.println("I'm a Programmer  my name is "+this.name);
-    }
 
 
 }
+

@@ -1,11 +1,9 @@
 package com.company.core.model;
 
-public class Singer extends Person {
+import com.company.core.annotations.ModelEnum;
+import com.company.core.model.Person;
 
-    public Singer(String name, String designation) {
-        this.name = name;
-        this.designation = designation;
-        System.out.println("I'm a Singer  my name is "+this.name);
-    }
+@ModelEnum(designation={"JAZZ","POP","ROCK"})
+public class Singer extends Person {
 
 }
