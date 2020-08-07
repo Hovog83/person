@@ -6,16 +6,15 @@ public class Validate {
 
     public static boolean CreateCommandPersonValidate(String command) throws CreateCommandPersonException {
         boolean regex = command.matches("[1-3]");
-        if(regex == false){
-            throw new CreateCommandPersonException("Person notsupported ");
+        if(!regex){
+            throw new CreateCommandPersonException("Person notsupported");
         }
         return true;
     }
-
     public static boolean TextLengthValidate(String text,Integer max)  {
          if(text.length() < 1 && text.length() >= max){
              return false;
-         };
+         }
         return true;
     }
     public static boolean TextEnumValidate(String text,String[] enumField)  {
@@ -26,18 +25,12 @@ public class Validate {
         }
         return false;
     }
-
     public static boolean isInteger(String s)  {
         try {
             Integer.parseInt(s);
-        } catch(NumberFormatException e) {
-            return false;
-        } catch(NullPointerException e) {
+        } catch(NumberFormatException | NullPointerException e) {
             return false;
         }
         return true;
     }
-
-
-
 }
