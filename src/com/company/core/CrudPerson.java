@@ -3,20 +3,18 @@ package com.company.core;
 import com.company.core.model.Person;
 import com.company.core.service.factory.PersonEnum;
 import com.company.core.service.factory.PersonFactory;
-import com.company.core.service.interfacer.PersonAction;
 import com.company.core.exception.CreateCommandPersonException;
 import com.company.utils.Validate;
 import com.company.core.annotations.ModelEnum;
-
 import java.util.HashMap;
 import java.util.Scanner;
 
 public class CrudPerson {
 
     public static int mistakeCount = 0;
-    private Scanner scanner = new Scanner(System.in);
+    private final Scanner scanner = new Scanner(System.in);
 
-    public PersonAction init() throws ClassNotFoundException {
+    public void init()  {
        System.out.println("what type of person user want to create 1-dancer , 2-singer , 3-programmer");
        String command = this.scanner.nextLine();
         try {
@@ -33,14 +31,14 @@ public class CrudPerson {
         PersonEnum type = PersonEnum.values()[typeIndex];
         Person model = type.getValue();
         this.personForm(model);
-        return PersonFactory.getPerson(model);
+        PersonFactory.getPerson(model);
     }
-    private void personForm(Person model) throws ClassNotFoundException {
+    private void personForm(Person model)  {
         ModelEnum anno = model.getClass().getAnnotation(ModelEnum.class);
-        HashMap<String, String> modelForm = new HashMap<String, String>();
-        modelForm.put("surname",     putFildeText("surname") );
-        modelForm.put("lastname",    putFildeText("lastname") );
-        modelForm.put("nickname",    putFildeText("nickname") );
+        HashMap<String, String> modelForm = new HashMap<>();
+        modelForm.put("surName",     putFildeText("surName") );
+        modelForm.put("lastName",    putFildeText("lastName") );
+        modelForm.put("nickName",    putFildeText("nickName") );
         modelForm.put("designation", putFildeEnum("designation", anno.designation()));
         modelForm.put("email",       putFildeText("email") );
         modelForm.put("age",         putFildeInt("age") );
@@ -64,8 +62,8 @@ public class CrudPerson {
         return in;
     }
     private String putFildeEnum(String fieldName, String[] enumField){
-        String ms = "";
-        for (String m: enumField) ms += m + " ";
+        StringBuilder ms = new StringBuilder();
+        for (String m: enumField) ms.append(m).append(" ");
         System.out.println("Enter "+ fieldName +" in "+ms);
         String in =  this.scanner.nextLine();
         boolean b = Validate.TextEnumValidate(in, enumField);
