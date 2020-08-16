@@ -6,14 +6,33 @@ import com.company.core.model.Programmer;
 import com.company.core.model.Singer;
 
 public enum PersonEnum {
-    DANCER( new Dancer()), SINGER(new Singer()), PROGRAMMER(new Programmer());
+    DANCER( 1 ), SINGER( 2 ), PROGRAMMER( 3 );
 
-    private final Person value;
+    private final int value;
 
-    PersonEnum(Person value) {
+    PersonEnum(int value) {
         this.value = value;
     }
-    public Person getValue() {
-        return value;
+
+    public Person getModel() {
+        switch(value) {
+            case 1:
+                return new Dancer();
+            case 2:
+                return new Singer();
+            case 3:
+                return  new Programmer();
+            default:
+                return null;
+        }
+    }
+
+    public static PersonEnum valueOfLabel(int label) {
+        for (PersonEnum e : values()) {
+            if (e.value == label) {
+                return e;
+            }
+        }
+        return null;
     }
 }

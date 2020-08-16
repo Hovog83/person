@@ -1,6 +1,7 @@
 package com.company.core.service.factory;
 
 
+import com.company.core.exception.ActionImplNotFondException;
 import com.company.core.model.Dancer;
 import com.company.core.model.Person;
 import com.company.core.model.Programmer;
@@ -23,7 +24,7 @@ public class PersonFactory {
         }else if(person instanceof Singer){
            toReturn = new SingerActionImpl(person);
         }else{
-            throw new IllegalArgumentException("Wrong doughnut type:");
+            throw new ActionImplNotFondException("Wrong doughnut type:");
         }
         return toReturn;
     }

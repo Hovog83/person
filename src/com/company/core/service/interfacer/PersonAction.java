@@ -4,4 +4,5 @@ public interface PersonAction {
     void walk();
     void eat();
     void learn();
+    void command();
 }

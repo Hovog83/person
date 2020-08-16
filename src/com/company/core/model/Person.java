@@ -4,7 +4,7 @@ package com.company.core.model;
 import java.util.HashMap;
 
 public class  Person {
-    public static  int pk=0;
+//    public static  int pk=0;
 //    public static  HashMap<Integer, Person> PersonTabel;
 
     protected String surName = null;
@@ -41,7 +41,25 @@ public class  Person {
         this.gender = gender;
     }
 
-    public int save(HashMap<String, String> modelForm){
+
+
+//    public static int getPk() { return pk; }
+
+    public String getSurName() {return surName; }
+
+    public String getLastName() { return lastName; }
+
+    public String getNickName() {  return nickName; }
+
+    public String getEmail() { return email; }
+
+    public Integer getAge() { return age; }
+
+    public String getGender() {  return gender; }
+
+    public String getDesignation() { return designation; }
+
+    public boolean save(HashMap<String, String> modelForm){
         this.setSurName(modelForm.get("surName"));
         this.setLastName(modelForm.get("lastName"));
         this.setNickname(modelForm.get("nickName"));
@@ -50,10 +68,9 @@ public class  Person {
         this.setDesignation(modelForm.get("designation"));
         this.setAge(Integer.parseInt(modelForm.get("age")));
         this.setGender(modelForm.get("gender"));
-        Person.pk++;
+//        Person.pk++;
 //        Person.PersonTabel.put(Person.pk,this);
-        return Person.pk;
+        return true;
     }
-
 }
 

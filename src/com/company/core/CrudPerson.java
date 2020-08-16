@@ -2,8 +2,8 @@ package com.company.core;
 
 import com.company.core.model.Person;
 import com.company.core.service.factory.PersonEnum;
-import com.company.core.service.factory.PersonFactory;
 import com.company.core.exception.CreateCommandPersonException;
+import com.company.utils.MyScanner;
 import com.company.utils.Validate;
 import com.company.core.annotations.ModelEnum;
 import java.util.HashMap;
@@ -12,9 +12,9 @@ import java.util.Scanner;
 public class CrudPerson {
 
     public static int mistakeCount = 0;
-    private final Scanner scanner = new Scanner(System.in);
+    private final Scanner scanner = MyScanner.getScanner();
 
-    public void init()  {
+    public Person create()  {
        System.out.println("what type of person user want to create 1-dancer , 2-singer , 3-programmer");
        String command = this.scanner.nextLine();
         try {
@@ -25,13 +25,14 @@ public class CrudPerson {
                 this.exit();
             }
             System.out.println(e.getMessage());
-            this.init();
+            this.create();
         }
+
         int typeIndex = Integer.parseInt(command);
-        PersonEnum type = PersonEnum.values()[typeIndex];
-        Person model = type.getValue();
+        PersonEnum type = PersonEnum.valueOfLabel(typeIndex);
+        Person model = type.getModel();
         this.personForm(model);
-        PersonFactory.getPerson(model);
+        return model;
     }
     private void personForm(Person model)  {
         ModelEnum anno = model.getClass().getAnnotation(ModelEnum.class);
@@ -43,13 +44,10 @@ public class CrudPerson {
         modelForm.put("email",       putFildeText("email") );
         modelForm.put("age",         putFildeInt("age") );
         modelForm.put("gender",      putFildeEnum("gender",new String[]{"Male", "Female"}));
-        int pk = model.save(modelForm);
-        System.out.println("user id:"+pk);
+        boolean pk = model.save(modelForm);
+        System.out.println("successful");
     }
 
-    private void exit() {
-        System.out.println("exit");
-    }
 
     private String putFildeText(String fieldName){
         System.out.println("Enter " + fieldName);
@@ -84,7 +82,7 @@ public class CrudPerson {
             return in;
         }
     }
-
-
-
+    private void exit() {
+        System.out.println("exit");
+    }
 }
